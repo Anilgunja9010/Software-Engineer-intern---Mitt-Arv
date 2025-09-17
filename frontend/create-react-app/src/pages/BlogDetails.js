@@ -1,7 +1,8 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getBlogById, deleteBlog } from "../services/api"; // deleteBlog import chesanu
+import { getBlogById, deleteBlog } from "../services/api";
+import "../styles/BlogDetails.css";
 
 function BlogDetails() {
   const { id } = useParams();
@@ -23,44 +24,29 @@ function BlogDetails() {
   if (!blog) return <p>Blog not found</p>;
 
   return (
-    <div style={{ maxWidth: "800px", margin: "20px auto" }}>
-      <h1>{blog.title}</h1>
-      <p>{blog.content}</p>
-      <p>
+    <div className="blog-details-container">
+      <h1 className="blog-details-title">{blog.title}</h1>
+      <p className="blog-details-content">{blog.content}</p>
+
+      <p className="blog-details-tags">
         <strong>Tags:</strong> {blog.tags?.join(", ")}
       </p>
 
-      <small>
+      <small className="blog-details-author">
         By {blog.author?.username || "Unknown"} ({blog.author?.email || "no email"})
       </small>
 
       {/* Buttons */}
-      <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
-        {/* Edit Button */}
+      <div className="blog-details-buttons">
         <button
-          style={{
-            padding: "8px 16px",
-            backgroundColor: "#007bff",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
+          className="edit-btn"
           onClick={() => navigate(`/blogs/${id}/edit`)}
         >
           Edit Blog
         </button>
 
-        {/* Delete Button */}
         <button
-          style={{
-            padding: "8px 16px",
-            backgroundColor: "red",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
+          className="delete-btn"
           onClick={async () => {
             if (window.confirm("Are you sure you want to delete this blog?")) {
               try {

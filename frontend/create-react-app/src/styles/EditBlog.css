@@ -1,0 +1,53 @@
+
+.edit-blog-container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-blog-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: darkcyan;
+}
+
+.edit-blog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.edit-blog-form input,
+.edit-blog-form textarea {
+ font-family: "Georgia", serif;  
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical; 
+}
+
+.edit-blog-form input:focus,
+.edit-blog-form textarea:focus {
+  border-color: darkcyan;
+  box-shadow: 0 0 5px rgba(0, 139, 139, 0.4);
+}
+
+.update-btn {
+  background: darkcyan;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.update-btn:hover {
+  background: #006666;
+}

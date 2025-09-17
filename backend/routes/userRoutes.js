@@ -13,7 +13,7 @@ router.post("/register", userRegister);
 router.post("/login", userLogin);
 
 //  Profile route
-router.get("/me", auth, async (req, res) => {
+router.get("/profile", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
     if (!user) {

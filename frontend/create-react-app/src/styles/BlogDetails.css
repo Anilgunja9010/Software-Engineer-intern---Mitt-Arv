@@ -1,0 +1,75 @@
+
+.blog-details-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #008B8B;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 139, 139, 0.2);
+}
+
+/* Title */
+.blog-details-title {
+  color: darkcyan;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+/* Content */
+.blog-details-content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* Tags */
+.blog-details-tags strong {
+  color: #008B8B;
+}
+
+.blog-details-tags {
+  margin-bottom: 10px;
+  color: #006666;
+}
+
+/* Author */
+.blog-details-author {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: #006666;
+  font-style: italic;
+}
+
+/* Buttons */
+.blog-details-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.edit-btn {
+  background-color: darkcyan;
+}
+
+.edit-btn:hover {
+  background-color: #006666;
+}
+
+.delete-btn {
+  background-color: red;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
+}

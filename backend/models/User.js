@@ -14,7 +14,13 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    profilePic: {
+        type : String,
+        default: "http://via.placeholder.com/150",
+
     }
+
 });
 
 const User = mongoose.model('User', UserSchema);

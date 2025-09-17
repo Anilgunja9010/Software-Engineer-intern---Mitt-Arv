@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { createBlog } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import "../styles/CreateBlog.css"
 
 function CreateBlog() {
   const [title, setTitle] = useState("");
@@ -22,35 +23,28 @@ function CreateBlog() {
       setTitle("");
       setContent("");
       setTags("");
-      navigate("/blogs"); // redirect to blog list
+      navigate("/blogs");
     } catch (err) {
       console.error("Error creating blog:", err);
-      alert(" Failed to create blog");
+      alert("Failed to create blog");
     }
   };
 
   return (
-    <div style={{ maxWidth: "600px", margin: "20px auto" }}>
+    <div className="create-container">
       <h2>Create Blog</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="create-form">
         <input
           type="text"
-          placeholder="Title"
+          placeholder="Enter blog title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          style={{ width: "100%", padding: "10px", margin: "5px 0" }}
           required
         />
         <textarea
-          placeholder="Content"
+          placeholder="Write your blog content..."
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "10px",
-            margin: "5px 0",
-            height: "120px",
-          }}
           required
         />
         <input
@@ -58,21 +52,9 @@ function CreateBlog() {
           placeholder="Tags (comma separated)"
           value={tags}
           onChange={(e) => setTags(e.target.value)}
-          style={{ width: "100%", padding: "10px", margin: "5px 0" }}
         />
-        <button
-          type="submit"
-          style={{
-            padding: "10px 20px",
-            marginTop: "10px",
-            backgroundColor: "green",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          + Create Blog
+        <button type="submit" className="create-btn">
+           Create Own Blog
         </button>
       </form>
     </div>

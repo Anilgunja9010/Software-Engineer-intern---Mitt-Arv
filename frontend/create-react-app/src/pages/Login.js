@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
-import { login } from "../services/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -12,49 +12,108 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await login({ email, password });
+      const res = await axios.post("http://localhost:5000/api/users/login", {
+        email,
+        password,
+      });
 
-      // 🔹 Save JWT + UserId
+      // Save token and user info in localStorage
       localStorage.setItem("token", res.data.token);
-      if (res.data.user?._id) {
-        localStorage.setItem("userId", res.data.user._id);
-      }
+      localStorage.setItem("user", JSON.stringify(res.data.user)); // full user object
+      localStorage.setItem("userId", res.data.user._id); // optional, if needed separately
 
-      setMessage("Login successful!");
-      setEmail("");
-      setPassword("");
-
-      // redirect to blogs
-      navigate("/blogs");
+      setMessage(" Login successful! Redirecting...");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     } catch (err) {
       console.error(err);
-      setMessage("Invalid credentials");
+      setMessage("Invalid credentials, please try again");
     }
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "20px auto" }}>
-      <h2>Login</h2>
+    <div
+      style={{
+        maxWidth: "400px",
+        margin: "40px auto",
+        padding: "20px",
+        border: "1px solid #ddd",
+        borderRadius: "8px",
+        boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
+      }}
+    >
+      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Login</h2>
+
       <form onSubmit={handleSubmit}>
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "12px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+          }}
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "12px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+          }}
         />
-        <button type="submit">Login</button>
+
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            padding: "10px",
+            backgroundColor: "darkcyan",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "teal")}
+          onMouseOut={(e) => (e.target.style.backgroundColor = "darkcyan")}
+        >
+          Login
+        </button>
       </form>
-      {message && <p>{message}</p>}
+
+      {message && (
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "10px",
+            color: message.includes("successful") ? "green" : "red",
+          }}
+        >
+          {message}
+        </p>
+      )}
+
+      <p style={{ textAlign: "center", marginTop: "15px" }}>
+        Don’t have an account?{" "}
+        <Link
+          to="/register"
+          style={{ color: "#007bff", textDecoration: "none" }}
+        >
+          Register here
+        </Link>
+      </p>
     </div>
   );
 }
